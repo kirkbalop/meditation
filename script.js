@@ -20,6 +20,16 @@ const app = () => {
   outline.style.strokeDasharray = length;
   outline.style.strokeDashoffset = length;
 
+  // Event Listeners
+
+  sounds.forEach((sound) => {
+    sound.addEventListener("click", function () {
+      song.src = this.getAttribute("data-sound");
+      video.src = this.getAttribute("data-video");
+      checkStatus(song);
+    });
+  });
+
   play.addEventListener("click", () => {
     checkStatus(song);
   });
