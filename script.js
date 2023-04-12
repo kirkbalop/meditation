@@ -3,6 +3,7 @@ const app = () => {
   const play = document.querySelector(".play");
   const outline = document.querySelector(".moving-outline circle");
   const video = document.querySelector(".vid-container video");
+  const timeSelect = document.querySelectorAll(".time-select button");
 
   //Sound Bank
   const sounds = document.querySelectorAll(".sound-selector button");
@@ -18,12 +19,18 @@ const app = () => {
 
   outline.style.strokeDasharray = length;
   outline.style.strokeDashoffset = length;
-  // let duration = document
-  //   .querySelector(".time-select button data-time")
-  //   .value();
 
   play.addEventListener("click", () => {
     checkStatus(song);
+  });
+
+  timeSelect.forEach((option) => {
+    option.addEventListener("click", function () {
+      defaultDuration = this.getAttribute("data-time");
+      timeDisplay.textContent = `${Math.floor(
+        defaultDuration / 60
+      )}:${Math.floor(defaultDuration % 60)}`;
+    });
   });
 
   // Play/Pause function
@@ -36,6 +43,27 @@ const app = () => {
       song.pause();
       video.pause();
       play.src = "./svg/play.svg";
+    }
+  };
+
+  // Animations
+  song.ontimeupdate = () => {
+    let currentTime = song.currentTime;
+    let timeElapsed = defaultDuration - currentTime;
+    let seconds = Math.floor(timeElapsed % 60);
+    let minutes = Math.floor(timeElapsed / 60);
+
+    // The Circle Animation
+    let circleProgress = length - (currentTime / defaultDuration) * length;
+    outline.style.strokeDashoffset = circleProgress;
+
+    // The Timer Animation
+    timeDisplay.textContent = `${minutes}:${seconds}`;
+    if (currentTime >= defaultDuration) {
+      song.pause();
+      song.currentTime = 0;
+      play.src = "./svg/play.svg";
+      video.pause();
     }
   };
 };
