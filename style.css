@@ -16,16 +16,74 @@
 .player-container {
   height: 80%;
   flex: 1;
-}
-
-.time-select {
-  background: salmon;
-}
-
-.sound-selector {
-  background: orchid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .player-container {
-  background: lightseagreen;
+  position: relative;
+}
+
+.player-container svg {
+  position: absolute;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.vid-container {
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  z-index: -10;
+}
+
+.time-display {
+  position: absolute;
+  bottom: 10%;
+  color: white;
+  font-size: 50px;
+}
+
+.time-select button,
+.sound-selector button {
+  color: white;
+  width: 30%;
+  height: 10%;
+  background: none;
+  border: 2px solid white;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.time-select button:hover {
+  color: black;
+  background: white;
+  transition: all 0.5s ease;
+}
+
+.sound-selector button {
+  border: none;
+  height: 120px;
+  width: 120px;
+  padding: 30px;
+  border-radius: 120px;
+}
+
+.sound-selector button:nth-child(1) {
+  background: #4972a1;
+}
+
+.sound-selector button:nth-child(2) {
+  background: #a14f49;
+}
+
+.sound-selector button img {
+  height: 100%;
 }
