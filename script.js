@@ -18,14 +18,26 @@ const app = () => {
 
   outline.style.strokeDasharray = length;
   outline.style.strokeDashoffset = length;
-  let duration = document
-    .querySelector(".time-select button data-time")
-    .value();
+  // let duration = document
+  //   .querySelector(".time-select button data-time")
+  //   .value();
 
   play.addEventListener("click", () => {
-    song.play();
-    console.log("CLICK!");
+    checkStatus(song);
   });
+
+  // Play/Pause function
+  const checkStatus = (song) => {
+    if (song.paused) {
+      song.play();
+      video.play();
+      play.src = "./svg/pause.svg";
+    } else {
+      song.pause();
+      video.pause();
+      play.src = "./svg/play.svg";
+    }
+  };
 };
 
 app();
